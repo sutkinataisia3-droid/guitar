@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Классическая гитара | Адаптивная версия</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #2c2c2c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            font-weight: 400;
+            padding: 0;
+        }
+
+        /* Фрейм: изначально 1440px, но на мобильных устройствах станет гибким */
+        .frame {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #FFF2DF;
+            position: relative;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+            /* высота автоматическая — контент растянет */
+            height: auto;
+            min-height: 1840px; /* сохраняем пропорции, но на мобилке контент может быть выше */
+        }
+
+        /* ----- ПЕРВАЯ ЗОНА (адаптивная) ----- */
+        .zone-one {
+            width: 100%;
+            background-color: #FFF2DF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;  /* отступы вместо фиксированной высоты */
+            min-height: 200px;
+        }
+
+        .rounded-title-box {
+            width: 100%;
+            max-width: 1196px;
+            background-color: #6E483C;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px 24px;
+            height: auto;
+            min-height: 100px;
+        }
+
+        .rounded-title-box span {
+            color: #FFFFFF;
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 400;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        /* ----- ВТОРАЯ ЗОНА (адаптивная: картинка масштабируется) ----- */
+        .zone-two {
+            width: 100%;
+            background-color: #EED3AD;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 16px;
+            min-height: auto;
+        }
+
+        .center-image {
+            width: 100%;
+            max-width: 492px;
+            height: auto;
+            aspect-ratio: 492 / 747; /* сохраняем пропорции 492:747 */
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 4px;
+        }
+
+        /* ----- ТРЕТЬЯ ЗОНА (адаптивная, без абсолютного позиционирования для мобилок) ----- */
+        .zone-three {
+            width: 100%;
+            background-color: #FFF2DF;
+            padding: 32px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        /* общие стили для всех текстовых блоков, теперь адаптивные отступы */
+        .price-adaptive,
+        .desc-title-adaptive,
+        .desc-text-adaptive,
+        .specs-title-adaptive,
+        .spec-item-adaptive,
+        .order-btn-wrapper {
+            width: 100%;
+        }
+
+        .price-adaptive {
+            font-size: clamp(28px, 7vw, 48px);
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 28px;
+            margin-top: 8px;
+            line-height: 1.2;
+        }
+
+        .desc-title-adaptive {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+
+        .desc-text-adaptive {
+            font-size: clamp(16px, 4.5vw, 24px);
+            font-weight: 400;
+            color: #000000;
+            line-height: 1.45;
+            margin-bottom: 40px;
+            max-width: 100%;
+        }
+
+        .specs-title-adaptive {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        /* список характеристик с отступами */
+        .spec-list {
+            width: 100%;
+            margin-bottom: 48px;
+        }
+
+        .spec-item-adaptive {
+            font-size: clamp(16px, 4.5vw, 24px);
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .spec-item-adaptive:last-child {
+            margin-bottom: 0;
+        }
+
+        /* кнопка адаптивная: ширина гибкая, но максимальная 492px, центр */
+        .order-btn-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 16px;
+            margin-bottom: 20px;
+        }
+
+        .order-button {
+            width: 100%;
+            max-width: 492px;
+            background-color: #6E483C;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            padding: 18px 20px;
+            min-height: 70px;
+            /* Добавляем отдельные стили для масштабирования и затемнения */
+            will-change: transform, background-color;
+        }
+
+        /* Эффект при наведении: кнопка становится меньше (уменьшаем масштаб) и темнее */
+        .order-button:hover {
+            transform: scale(0.97);
+            background-color: #4d2f24;  /* более тёмный оттенок коричневого */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Небольшой эффект при клике для тактильного ощущения (опционально, но не меняет основное требование) */
+        .order-button:active {
+            transform: scale(0.95);
+            background-color: #3d241b;
+            transition: transform 0.08s ease, background-color 0.08s ease;
+        }
+
+        /* на больших экранах кнопка сохраняет высоту 141px, на мобилках — комфортную */
+        @media (min-width: 1024px) {
+            .order-button {
+                height: 141px;
+                padding: 0;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .order-button {
+                height: auto;
+                padding: 18px 24px;
+            }
+        }
+
+        .order-button span {
+            color: #FFFFFF;
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
+        }
+
+        /* для сохранения пропорций контента в рамках первоначальной высоты, 
+           но теперь высота фрейма автоматическая, но background продолжается */
+        
+        /* планшетные и десктопные отступы, чтобы левые отступы (122px) сохранялись на широких экранах */
+        @media (min-width: 1200px) {
+            .zone-three {
+                padding-left: 122px;
+                padding-right: 122px;
+            }
+            .price-adaptive,
+            .desc-title-adaptive,
+            .desc-text-adaptive,
+            .specs-title-adaptive,
+            .spec-list,
+            .order-btn-wrapper {
+                max-width: 1196px;
+                margin-left: 0;
+                margin-right: auto;
+            }
+            /* на десктопе точно соблюдаем классические отступы от левого края */
+            .zone-three {
+                padding-left: 122px;
+                padding-right: 122px;
+            }
+        }
+
+        /* для экранов от 768px до 1199px: отступы умеренные, но текст не прилипает к краю */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .zone-three {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .price-adaptive,
+            .desc-title-adaptive,
+            .desc-text-adaptive,
+            .specs-title-adaptive,
+            .spec-list,
+            .order-btn-wrapper {
+                max-width: 100%;
+            }
+        }
+
+        /* для мобильных устройств (до 767px) */
+        @media (max-width: 767px) {
+            .zone-one {
+                padding: 30px 16px;
+                min-height: auto;
+            }
+            .rounded-title-box {
+                border-radius: 24px;
+                padding: 16px 20px;
+            }
+            .zone-two {
+                padding: 16px;
+            }
+            .zone-three {
+                padding: 24px 20px 48px 20px;
+            }
+            .price-adaptive {
+                margin-bottom: 20px;
+            }
+            .desc-text-adaptive {
+                margin-bottom: 32px;
+            }
+            .spec-list {
+                margin-bottom: 36px;
+            }
+            .spec-item-adaptive {
+                margin-bottom: 12px;
+            }
+            .order-button {
+                border-radius: 28px;
+            }
+            /* На мобильных устройствах hover-эффект масштабирования может быть слегка адаптирован, 
+               но оставляем как есть, он также сработает на тач-устройствах при касании (состояние hover непродолжительное) */
+        }
+
+        /* для очень маленьких телефонов (ширина ≤ 480px) чуть уменьшаем скругления */
+        @media (max-width: 480px) {
+            .rounded-title-box {
+                border-radius: 20px;
+            }
+            .order-button {
+                border-radius: 24px;
+            }
+            .order-button span {
+                font-size: 24px;
+            }
+            .desc-text-adaptive {
+                line-height: 1.4;
+            }
+        }
+
+        /* чтобы картинка не деформировалась и сохраняла чёткость */
+        .center-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* поправим фон фрейма для целостности */
+        .frame {
+            background-color: #FFF2DF;
+        }
+
+        /* дополнительно: чтобы первая зона не теряла цвет фона на стыке */
+        .zone-one, .zone-three {
+            background-color: #FFF2DF;
+        }
+
+        /* гарантия: текст описания переносится правильно */
+        .desc-text-adaptive {
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        /* Добавляем улучшенную поддержку accessibility: фокус также уменьшает кнопку, 
+           чтобы поведение было логичным, но не конфликтовало с требованиями */
+        .order-button:focus-visible {
+            outline: 3px solid #a06e5a;
+            outline-offset: 2px;
+            transform: scale(0.98);
+            background-color: #5c3e30;
+        }
+    </style>
+</head>
+<body>
+<div class="frame">
+    <!-- ПЕРВАЯ КОНТЕНТНАЯ ЗОНА: адаптивная, с центрированным прямоугольником -->
+    <div class="zone-one">
+        <div class="rounded-title-box">
+            <span>Классическая гитара</span>
+        </div>
+    </div>
+
+    <!-- ВТОРАЯ КОНТЕНТНАЯ ЗОНА: картинка с пропорциями 492x747 (aspect-ratio) -->
+    <div class="zone-two">
+        <img class="center-image" 
+             src="images/Рисунок2.png" 
+             alt="Классическая гитара крупным планом"
+             onerror="this.onerror=null; this.src='https://placehold.co/492x747/EED3AD/6E483C?text=Classic+Guitar';">
+    </div>
+
+    <!-- ТРЕТЬЯ ЗОНА: динамическая, все элементы следуют друг за другом без абсолютного позиционирования,
+         но на десктопе выдерживаются отступы от левого края 122px, при этом порядок и расстояния
+         соответствуют изначальному дизайну (относительное расположение: цена -> описание -> текст -> характеристики -> кнопка)
+         и все значения font-size, margin соблюдены с учётом адаптивности.
+         Чтобы точно сохранить ощущение "расстояния" в респонсив-дизайне, используем вертикальные отступы,
+         которые приближены к оригинальной композиции на широком экране (но без жесткой фиксации пикселей, чтобы было удобно на мобилках) -->
+    <div class="zone-three">
+        <!-- Цена: "Цена: 17 000 р." -->
+        <div class="price-adaptive">Цена: 17 000 р.</div>
+
+        <!-- Заголовок "Описание:" -->
+        <div class="desc-title-adaptive">Описание:</div>
+
+        <!-- Текст описания -->
+        <div class="desc-text-adaptive">
+           Классическая гитара - выбор гитаристов, увлекающихся игрой перебором или в технике фингерстайл. Имеет широкий гриф и мягкие нейлоновые струны, позволяющие исполнять быстрые мелодии и сложные композиции. Подходит как для опытных музыкантов, так и для начинающих.
+        </div>
+
+        <!-- Заголовок "Характеристики:" -->
+        <div class="specs-title-adaptive">Характеристики:</div>
+
+        <!-- Список характеристик -->
+        <div class="spec-list">
+            <div class="spec-item-adaptive">Количество ладов: 18</div>
+            <div class="spec-item-adaptive">Количество струн: 6</div>
+            <div class="spec-item-adaptive">Материал грифа: клён</div>
+            <div class="spec-item-adaptive">Материал корпуса: липа</div>
+        </div>
+
+        <!-- Кнопка "Заказать" (обёртка для центрирования) -->
+        <div class="order-btn-wrapper">
+            <button class="order-button" onclick="window.location.href='index7.html'">
+                <span>Заказать</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Дополнительная логика: адаптивное поведение уже встроено в CSS.
+    // Убедимся, что на десктопных разрешениях (≥1440px) .frame принимает максимальную ширину 1440px,
+    // а контент внутри не растягивается сверх меры. Отлично работает.
+    // Добавим мелкий фикс для сохранения пропорций фрейма на больших экранах: 
+    if (window.innerWidth >= 1440) {
+        const frame = document.querySelector('.frame');
+        if(frame) frame.style.maxWidth = '1440px';
+    }
+    window.addEventListener('resize', function() {
+        const frame = document.querySelector('.frame');
+        if(window.innerWidth >= 1440) {
+            frame.style.maxWidth = '1440px';
+        } else {
+            frame.style.maxWidth = '100%';
+        }
+    });
+    
+    // Небольшая дополнительная проверка для обеспечения корректного состояния hover на тач-устройствах
+    // на случай если браузеры ошибочно залипают hover, но это не влияет на функционал.
+    // Оставим оригинальное поведение кнопки с затемнением и масштабированием строго по требованию.
+    console.log("Адаптивная версия готова: кнопка при наведении уменьшается (scale 0.97) и становится темнее (#4d2f24). Остальные элементы без изменений.");
+</script>
+</body>
+</html>

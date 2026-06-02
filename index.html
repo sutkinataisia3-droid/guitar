@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Guitarra — магазин гитар | Адаптивная версия</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #c9c3b6;
+            font-family: 'Inter', 'Arial', sans-serif;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .main-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+            overflow-x: hidden;
+        }
+
+        section {
+            padding: 48px 24px;
+        }
+
+        .section-cream {
+            background: #FFF2DF;
+        }
+        .section-beige {
+            background: #EED3AD;
+        }
+        .section-brown {
+            background: #6E483C;
+        }
+
+        /* Основной контентный блок — ширина 1196px, как в исходном макете */
+        .container {
+            max-width: 1196px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ========== ШАПКА ========== */
+        .top-header {
+            background: #FFF2DF;
+            padding: 24px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        /* Для шапки также ограничим содержимое по ширине 1196px, чтобы логотип и кнопка не разъезжались */
+        .top-header .container-header {
+            max-width: 1196px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo {
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .logo-g, .logo-r1, .logo-r2 {
+            color: #FF3838;
+        }
+        .logo-u, .logo-i, .logo-t, .logo-a1, .logo-a2 {
+            color: #000000;
+        }
+        .contact-button {
+            background: #FF3838;
+            border: none;
+            border-radius: 15px;
+            padding: 14px 28px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            font-family: inherit;
+        }
+        .contact-button:hover {
+            background: #cc2e2e;
+            transform: scale(0.97);
+        }
+
+        /* ========== ГЕРОЙ (первая зона) — пропорции 1196x339 ========== */
+        .hero {
+            background: #EED3AD;
+        }
+        .hero-title {
+            font-size: clamp(24px, 6vw, 32px);
+            margin-bottom: 28px;
+            color: #000000;
+        }
+        .hero-desc {
+            font-size: clamp(18px, 4vw, 24px);
+            text-align: right;
+            margin-bottom: 40px;
+            color: #000000;
+            line-height: 1.45;
+        }
+        /* точные пропорции первой картинки 1196x339 */
+        .hero-image {
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            aspect-ratio: 1196 / 339;
+            background: #e8d5b5;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ========== ВТОРАЯ ЗОНА: преимущества + картинка (пропорции 546x561) ========== */
+        .features {
+            background: #FFF2DF;
+        }
+        .features-title {
+            font-size: clamp(24px, 6vw, 32px);
+            margin-bottom: 40px;
+            color: #000000;
+        }
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .plectrum {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: #FF3838;
+            transform: rotate(30deg);
+            clip-path: polygon(50% 0%, 100% 70%, 50% 100%, 0% 70%);
+            border-radius: 30% 30% 20% 20% / 40% 40% 20% 20%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .feature-text {
+            font-size: clamp(18px, 4vw, 24px);
+            color: #000000;
+            flex: 1;
+            line-height: 1.4;
+        }
+        .final-text {
+            font-size: clamp(18px, 4vw, 24px);
+            margin-top: 32px;
+            margin-bottom: 0;
+            color: #000000;
+            line-height: 1.45;
+        }
+        .feature-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 0px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 546 / 561;
+        }
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (min-width: 768px) {
+            .features-wrapper {
+                display: flex;
+                gap: 48px;
+                align-items: flex-start;
+            }
+            .features-left {
+                flex: 1;
+            }
+            .feature-image {
+                flex: 0 0 auto;
+                width: 45%;
+                max-width: 480px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .feature-image {
+                width: 480px;
+            }
+        }
+
+        /* ========== КРАСНЫЙ БАННЕР ========== */
+        .red-banner {
+            background: #FF3838;
+            border-radius: 30px;
+            padding: 28px 20px;
+            text-align: center;
+            margin-bottom: 56px;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        .banner-text1 {
+            font-size: clamp(24px, 6vw, 32px);
+            color: #FFFFFF;
+        }
+        .banner-text2 {
+            font-size: clamp(16px, 4vw, 24px);
+            color: #FFFFFF;
+            margin-top: 8px;
+        }
+
+        /* ========== КАРТОЧКИ ТОВАРОВ (гитары) — кнопки 80x55 справа ========== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+        @media (min-width: 640px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .product-card {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 345 / 438;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .info-card {
+            background: #FFF2DF;
+            padding: 20px 20px 24px;
+            margin-top: -4px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+        }
+        .cat-name {
+            font-size: clamp(20px, 5vw, 24px);
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 18px;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .cat-count {
+            font-size: clamp(18px, 4vw, 24px);
+            color: #000000;
+        }
+        .goto-btn {
+            width: 80px;
+            height: 55px;
+            background: #FF3838;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .goto-btn:hover {
+            background: #cc2e2e;
+            transform: scale(0.96);
+        }
+
+        /* ========== БАННЕР КОРИЧНЕВЫЙ ========== */
+        .brown-banner {
+            background: #6E483C;
+            border-radius: 30px;
+            padding: 28px 20px;
+            text-align: center;
+            margin-bottom: 56px;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        .banner-text3 {
+            font-size: clamp(24px, 6vw, 32px);
+            color: #FFFFFF;
+        }
+
+        /* ========== ДОПОЛНИТЕЛЬНЫЕ КАТЕГОРИИ ========== */
+        .extra-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 640px) {
+            .extra-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .extra-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .extra-card {
+            display: flex;
+            flex-direction: column;
+        }
+        .extra-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .extra-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .dark-card {
+            background: #6E483C;
+            padding: 20px 20px 24px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .extra-title {
+            font-size: clamp(20px, 5vw, 24px);
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 18px;
+        }
+        .extra-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .extra-btn {
+            width: 80px;
+            height: 55px;
+            background: #FFF2DF;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #000000;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .extra-btn:hover {
+            background: #e6dfc9;
+            transform: scale(0.96);
+        }
+
+        /* ========== ФУТЕР (КОНТАКТЫ) ========== */
+        .contacts-section {
+            background: #6E483C;
+            color: #FFFFFF;
+        }
+        .contacts-title {
+            font-size: clamp(24px, 6vw, 32px);
+            margin-bottom: 24px;
+        }
+        .contacts-sub {
+            font-size: clamp(18px, 4vw, 24px);
+            margin-bottom: 12px;
+        }
+        .contacts-email {
+            font-size: clamp(18px, 4vw, 24px);
+            margin-bottom: 40px;
+        }
+        .company-title {
+            font-size: clamp(24px, 6vw, 32px);
+            margin-bottom: 16px;
+        }
+        .company-info {
+            font-size: clamp(18px, 4vw, 24px);
+            line-height: 1.4;
+        }
+
+        /* Мобильные отступы */
+        @media (max-width: 480px) {
+            section {
+                padding: 40px 20px;
+            }
+            .top-header {
+                padding: 20px;
+            }
+            .red-banner, .brown-banner {
+                padding: 20px 16px;
+            }
+            .info-card, .dark-card {
+                padding: 16px;
+            }
+            .goto-btn, .extra-btn {
+                width: 70px;
+                height: 50px;
+            }
+        }
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <!-- ШАПКА с ограничением по ширине 1196px -->
+    <div class="top-header">
+        <div class="container-header">
+            <div class="logo">
+                <span class="logo-g">G</span><span class="logo-u">u</span><span class="logo-i">i</span><span class="logo-t">t</span><span class="logo-a1">a</span><span class="logo-r1">r</span><span class="logo-r2">r</span><span class="logo-a2">a</span>
+            </div>
+            <button class="contact-button" id="contactBtnMobile">Связаться с нами</button>
+        </div>
+    </div>
+
+    <!-- ПЕРВАЯ ЗОНА: герой с пропорцией 1196x339 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-title">Guitarra - все о гитарах</div>
+            <div class="hero-desc">
+                В нашем магазине вы найдете инструмент на любой вкус: от классической la mancha до электро-гитары, а также все необходимые приспособления. В магазине работает консультант, который поможет вам в выборе инструмента. Можно сделать заказ онлайн. Бесплатная доставка. Работаем без выходных с 10:00 до 20:00. Ждем вас!
+            </div>
+            <div class="hero-image">
+                <img src="images/Развешанные гитары.png"
+                     alt="Магазин гитар Guitarra"
+                     onerror="this.src='https://placehold.co/1196x339/e8d5b5/3a2a1f?text=Guitarra+Collection'">
+            </div>
+        </div>
+    </section>
+
+    <!-- ВТОРАЯ ЗОНА: преимущества + картинка 546x561 -->
+    <section class="features">
+        <div class="container">
+            <div class="features-title">У нас вы найдете:</div>
+            <div class="features-wrapper">
+                <div class="features-left">
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="plectrum"></div>
+                            <div class="feature-text">Качественные музыкальные инструменты, сделанные с душой.</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="plectrum"></div>
+                            <div class="feature-text">Техническое оборудование: от тюнера до микрофона.</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="plectrum"></div>
+                            <div class="feature-text">Запасные части и аксессуары, необходимые каждому музыканту (струны, медиаторы, чехлы).</div>
+                        </div>
+                    </div>
+                    <div class="final-text">
+                        Guitarra - не просто магазин, где продают качественные музыкальные инструменты. Это сплоченная команда, которая заботится о том, чтобы каждая гитара нашла своего владельца. В каждый инструмент вложена душа, и мы надеемся, что она найдет отклик в вашем сердце. И неважно, профессиональный вы музыкант или любитель - здесь вы обязательно найдете гитару для себя.
+                    </div>
+                </div>
+                <div class="feature-image">
+                    <img src="images/Картинка1.png"
+                         alt="Гитара и музыка"
+                         onerror="this.src='https://placehold.co/546x561/e8d5b5/3a2a1f?text=Guitarra+Spirit'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТРЕТЬЯ ЗОНА: ассортимент гитар (кнопки 80x55 справа) -->
+    <section class="section-beige">
+        <div class="container">
+            <div class="red-banner">
+                <div class="banner-text1">Широкий ассортимент гитар</div>
+                <div class="banner-text2">Выбери ту, что подойдет именно тебе</div>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Рисунок2.png" alt="Классическая гитара" onerror="this.src='https://placehold.co/345x438/e8d5b5/3a2a1f?text=Classical'">
+                    </div>
+                    <div class="info-card">
+                        <div class="cat-name">Классические гитары</div>
+                        <div class="card-footer">
+                            <span class="cat-count">50 товаров</span>
+                            <button class="goto-btn" data-category="classic">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Рисунок3.png" alt="Акустическая гитара" onerror="this.src='https://placehold.co/345x438/e8d5b5/3a2a1f?text=Acoustic'">
+                    </div>
+                    <div class="info-card">
+                        <div class="cat-name">Акустические гитары</div>
+                        <div class="card-footer">
+                            <span class="cat-count">75 товаров</span>
+                            <button class="goto-btn" data-category="acoustic">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Рисунок4.png" alt="Электрогитара" onerror="this.src='https://placehold.co/345x438/e8d5b5/3a2a1f?text=Electric'">
+                    </div>
+                    <div class="info-card">
+                        <div class="cat-name">Электрогитары</div>
+                        <div class="card-footer">
+                            <span class="cat-count">38 товаров</span>
+                            <button class="goto-btn" data-category="electric">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЧЕТВЁРТАЯ ЗОНА: дополнительные категории (кнопки 80x55 справа) -->
+    <section class="section-cream">
+        <div class="container">
+            <div class="brown-banner">
+                <div class="banner-text3">Дополнительные категории</div>
+            </div>
+            <div class="extra-grid">
+                <div class="extra-card">
+                    <div class="extra-img">
+                        <img src="images/Рисунок5.png" alt="Оборудование" onerror="this.src='https://placehold.co/344x344/6E483C/FFFFFF?text=Equipment'">
+                    </div>
+                    <div class="dark-card">
+                        <div class="extra-title">Оборудование</div>
+                        <div class="extra-footer">
+                            <span></span>
+                            <button class="extra-btn" data-extra="equipment">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="extra-card">
+                    <div class="extra-img">
+                        <img src="images/Рисунок6.png" alt="Запасные детали" onerror="this.src='https://placehold.co/344x344/6E483C/FFFFFF?text=Spare+parts'">
+                    </div>
+                    <div class="dark-card">
+                        <div class="extra-title">Запасные детали</div>
+                        <div class="extra-footer">
+                            <span></span>
+                            <button class="extra-btn" data-extra="spare">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="extra-card">
+                    <div class="extra-img">
+                        <img src="images/Рисунок7.png" alt="Аксессуары" onerror="this.src='https://placehold.co/344x344/6E483C/FFFFFF?text=Accessories'">
+                    </div>
+                    <div class="dark-card">
+                        <div class="extra-title">Аксессуары</div>
+                        <div class="extra-footer">
+                            <span></span>
+                            <button class="extra-btn" data-extra="accessories">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПЯТАЯ ЗОНА: контакты и компания -->
+    <section class="contacts-section">
+        <div class="container">
+            <div class="contacts-title">Контакты:</div>
+            <div class="contacts-sub">Связаться с нами можно, оставив сообщение на сайте</div>
+            <div class="contacts-email">или по почте: info@guitarratienda.ru</div>
+            <div class="company-title">Компания:</div>
+            <div class="company-info">ИП “Guitarra”, Россия, г. Санкт-Петербург, 11.10.2025 г.</div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function() {
+        // КНОПКА "СВЯЗАТЬСЯ С НАМИ" — переход на index7.html
+        const contactBtn = document.getElementById('contactBtnMobile');
+        if (contactBtn) {
+            contactBtn.addEventListener('click', () => {
+                window.location.href = 'index7.html';
+            });
+        }
+
+        // ПЕРВАЯ КНОПКА "Перейти" (Классические гитары) -> index1.html
+        const classicBtn = document.querySelector('.goto-btn[data-category="classic"]');
+        if (classicBtn) {
+            classicBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'index1.html';
+            });
+        }
+
+        // ВТОРАЯ КНОПКА "Перейти" (Акустические гитары) -> index2.html
+        const acousticBtn = document.querySelector('.goto-btn[data-category="acoustic"]');
+        if (acousticBtn) {
+            acousticBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'index2.html';
+            });
+        }
+
+        // ТРЕТЬЯ КНОПКА "Перейти" (Электрогитары) -> index3.html
+        const electricBtn = document.querySelector('.goto-btn[data-category="electric"]');
+        if (electricBtn) {
+            electricBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'index3.html';
+            });
+        }
+
+        // Более надёжный вариант - привязка к тексту категории
+        const equipmentBtn = document.querySelector('.extra-btn[data-extra="equipment"]');
+        const spareBtn = document.querySelector('.extra-btn[data-extra="spare"]');
+        const accessoriesBtn = document.querySelector('.extra-btn[data-extra="accessories"]');
+        
+        if (equipmentBtn) {
+            equipmentBtn.addEventListener('click', () => { window.location.href = 'index4.html'; });
+        }
+        if (spareBtn) {
+            spareBtn.addEventListener('click', () => { window.location.href = 'index5.html'; });
+        }
+        if (accessoriesBtn) {
+            accessoriesBtn.addEventListener('click', () => { window.location.href = 'index6.html'; });
+        }
+
+        const allImages = document.querySelectorAll('img');
+        allImages.forEach(img => {
+            img.addEventListener('error', function() {
+                if (!this.dataset.fallbackTriggered) {
+                    this.dataset.fallbackTriggered = 'true';
+                    let width = this.clientWidth || this.width || 400;
+                    let height = this.clientHeight || this.height || 300;
+                    if (height < 50) height = 300;
+                    if (width < 50) width = 400;
+                    this.src = `https://placehold.co/${width}x${height}/e8d5b5/3a2a1f?text=Guitarra`;
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>

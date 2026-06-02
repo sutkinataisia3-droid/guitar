@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Guitarra | Оформление доставки</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #EED3AD;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            font-weight: 400;
+            padding: 16px;
+        }
+
+        .frame {
+            width: 100%;
+            max-width: 1440px;
+            background-color: #EED3AD;
+            position: relative;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        /* Верхняя панель: логотип справа, текст под ним слева */
+        .top-bar {
+            position: relative;
+            padding-top: 38px;
+            padding-left: 122px;
+            padding-right: 122px;
+        }
+
+        /* Логотип: прижат к правому краю с отступом 122px */
+        .logo {
+            position: absolute;
+            top: 38px;
+            right: 122px;
+            font-size: 48px;
+            font-weight: bold;
+            font-family: inherit;
+            white-space: nowrap;
+            text-align: right;
+        }
+        
+        /* Цвета букв логотипа как в index.html */
+        .logo-g, .logo-r1, .logo-r2 {
+            color: #FF3838;
+        }
+        .logo-u, .logo-i, .logo-t, .logo-a1, .logo-a2 {
+            color: #000000;
+        }
+
+        /* Текст: под логотипом, слева */
+        .main-text {
+            color: #000000;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.3;
+            font-family: inherit;
+            text-align: left;
+            word-wrap: break-word;
+            width: 100%;
+            max-width: 599px;
+            margin-top: 80px;
+        }
+
+        .form-container {
+            background-color: #FFF2DF;
+            width: 100%;
+            max-width: 1191px;
+            margin-left: 122px;
+            margin-top: 170px;
+            position: relative;
+        }
+
+        .form-inner {
+            padding: 35px 0 50px 48px;
+        }
+
+        .form-title {
+            color: #000000;
+            font-size: 32px;
+            font-weight: 400;
+            font-family: inherit;
+            margin-bottom: 20px;
+            margin-left: 0;
+        }
+
+        .label {
+            color: #000000;
+            font-size: 32px;
+            font-weight: 400;
+            font-family: inherit;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .field-group {
+            margin-bottom: 28px;
+        }
+
+        /* Все поля ввода и текстовая область теперь шириной 1100px */
+        .input-field {
+            width: 100%;
+            max-width: 1100px;
+            height: 44px;
+            background-color: #D9D0C3;
+            border: none;
+            border-radius: 12px;
+            padding: 0 16px;
+            font-size: 20px;
+            font-family: inherit;
+            color: #1f1f1f;
+            outline: none;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .input-field:focus {
+            border: 1px solid #FF3838;
+            background-color: #fff3e8;
+        }
+
+        .textarea-message {
+            width: 100%;
+            max-width: 1100px;
+            background-color: #D9D0C3;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 20px;
+            font-family: inherit;
+            color: #1f1f1f;
+            resize: vertical;
+            outline: none;
+            min-height: 356px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .textarea-message:focus {
+            border: 1px solid #FF3838;
+            background-color: #fff3e8;
+        }
+
+        .btn-wrapper {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .submit-btn {
+            width: 351px;
+            height: 100px;
+            background-color: #FF3838;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.25s ease, transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* Эффекты при наведении: кнопка становится темнее и уменьшается */
+        .submit-btn:hover {
+            background-color: #cc2b2b;   /* более темный оттенок красного */
+            transform: scale(0.96);       /* визуальное уменьшение */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .submit-btn:active {
+            transform: scale(0.93);       /* дополнительный эффект нажатия для отзывчивости */
+            transition: transform 0.08s linear;
+        }
+        .btn-text {
+            color: #FFFFFF;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .input-field::placeholder, .textarea-message::placeholder {
+            color: #7a6e5f;
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        /* Планшеты и узкие экраны */
+        @media (max-width: 1000px) {
+            .top-bar {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+            .logo {
+                right: 32px;
+                font-size: 40px;
+            }
+            .main-text {
+                font-size: 20px;
+                max-width: 480px;
+                margin-top: 70px;
+            }
+            .form-container {
+                margin-left: 32px;
+                margin-right: 32px;
+                width: calc(100% - 64px);
+                margin-top: 150px;
+            }
+            .form-title {
+                font-size: 28px;
+            }
+            .label {
+                font-size: 26px;
+            }
+            .input-field {
+                max-width: 100%;
+                height: 48px;
+                font-size: 18px;
+            }
+            .textarea-message {
+                max-width: 100%;
+                min-height: 280px;
+                font-size: 18px;
+            }
+            .submit-btn {
+                width: 300px;
+                height: 85px;
+            }
+            .btn-text {
+                font-size: 28px;
+            }
+        }
+
+        /* Мобильные устройства */
+        @media (max-width: 760px) {
+            body {
+                padding: 8px;
+            }
+            .top-bar {
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-top: 24px;
+            }
+            .logo {
+                position: relative;
+                top: 0;
+                right: 0;
+                text-align: left;
+                white-space: normal;
+                font-size: 36px;
+                margin-bottom: 16px;
+            }
+            .main-text {
+                font-size: 18px;
+                max-width: 100%;
+                margin-top: 0;
+            }
+            .form-container {
+                margin-left: 16px;
+                margin-right: 16px;
+                width: calc(100% - 32px);
+                margin-top: 32px;
+            }
+            .form-inner {
+                padding: 20px 16px 30px 16px;
+            }
+            .form-title {
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
+            .label {
+                font-size: 22px;
+            }
+            .input-field {
+                height: 44px;
+                font-size: 16px;
+            }
+            .textarea-message {
+                min-height: 200px;
+                font-size: 16px;
+            }
+            .submit-btn {
+                width: 100%;
+                max-width: 280px;
+                height: 70px;
+            }
+            .btn-text {
+                font-size: 24px;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 550px) {
+            .main-text {
+                font-size: 16px;
+            }
+            .logo {
+                font-size: 32px;
+            }
+            .form-title {
+                font-size: 22px;
+            }
+            .label {
+                font-size: 20px;
+            }
+        }
+
+        /* На больших экранах сохраняем отступы */
+        @media (min-width: 1201px) {
+            .top-bar {
+                padding-left: 122px;
+                padding-right: 122px;
+            }
+            .logo {
+                right: 122px;
+                font-size: 48px;
+            }
+            .main-text {
+                font-size: 24px;
+            }
+        }
+
+        .frame {
+            max-width: 1440px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            overflow-x: auto;
+        }
+        .main-text, .logo {
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="frame">
+    <div class="top-bar">
+        <div class="logo">
+            <span class="logo-g">G</span><span class="logo-u">u</span><span class="logo-i">i</span><span class="logo-t">t</span><span class="logo-a1">a</span><span class="logo-r1">r</span><span class="logo-r2">r</span><span class="logo-a2">a</span>
+        </div>
+        <div class="main-text">
+            Чтобы оформить доставку или задать вопрос, напишите нам, мы с радостью ответим и обсудим дальнейшие этапы!
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-inner">
+            <div class="form-title">Заполните форму:</div>
+
+            <div class="field-group">
+                <label class="label label-fio">ФИО:</label>
+                <input type="text" class="input-field input-name" id="fullName" placeholder="Введите ваше ФИО" autocomplete="name">
+            </div>
+
+            <div class="field-group">
+                <label class="label label-email">E-mail:</label>
+                <input type="email" class="input-field input-email" id="email" placeholder="example@mail.ru" autocomplete="email">
+            </div>
+
+            <div class="field-group">
+                <label class="label label-message">Сообщение:</label>
+                <textarea class="textarea-message" id="message" placeholder="Введите ваше сообщение..."></textarea>
+            </div>
+
+            <div class="btn-wrapper">
+                <button class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Отправить</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const btn = document.getElementById('submitBtn');
+        const nameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const messageArea = document.getElementById('message');
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+            return re.test(email);
+        }
+
+        function showAlert(message, focusElement = null) {
+            alert(message);
+            if (focusElement && typeof focusElement.focus === 'function') {
+                setTimeout(() => focusElement.focus(), 10);
+            }
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const nameValue = nameInput.value.trim();
+            const emailValue = emailInput.value.trim();
+            const messageValue = messageArea.value.trim();
+
+            if (!nameValue) {
+                showAlert('Пожалуйста, заполните поле ФИО.', nameInput);
+                return;
+            }
+            if (!emailValue) {
+                showAlert('Пожалуйста, заполните поле E-mail.', emailInput);
+                return;
+            }
+            if (!isValidEmail(emailValue)) {
+                showAlert('Пожалуйста, введите корректный E-mail (например, name@domain.com).', emailInput);
+                return;
+            }
+            if (!messageValue) {
+                showAlert('Пожалуйста, напишите сообщение.', messageArea);
+                return;
+            }
+
+            alert(`Спасибо, ${nameValue}! Ваше сообщение отправлено.\nМы свяжемся с вами в ближайшее время.`);
+        }
+
+        btn.addEventListener('click', handleSubmit);
+
+        const inputs = [nameInput, emailInput];
+        inputs.forEach(input => {
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (input === nameInput) {
+                            emailInput.focus();
+                        } else if (input === emailInput) {
+                            messageArea.focus();
+                        }
+                    }
+                });
+            }
+        });
+    })();
+</script>
+</body>
+</html>

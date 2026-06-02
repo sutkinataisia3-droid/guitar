@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Струны для акустической гитары | Центрированная кнопка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #3a2a24;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+            font-weight: 400;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Фрейм – гибкий контейнер, сохраняющий внешний вид */
+        .frame {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #6E483C;
+            position: relative;
+            overflow-x: hidden;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        }
+
+        /* ========== ПЕРВАЯ ЗОНА ========== */
+        .zone-1 {
+            width: 100%;
+            background-color: #6E483C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            min-height: 200px;
+            height: auto;
+        }
+
+        /* Закругленный прямоугольник */
+        .rounded-rect {
+            width: 100%;
+            max-width: 1196px;
+            background-color: #FFF2DF;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .rounded-rect h1 {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        /* ========== ВТОРАЯ ЗОНА ========== */
+        .zone-2 {
+            width: 100%;
+            background-color: #FFF2DF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+
+        /* Картинка квадрат 1:1 */
+        .center-image {
+            width: 100%;
+            max-width: 747px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+            border-radius: 24px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+        }
+
+        /* ========== ТРЕТЬЯ ЗОНА ========== 
+           Кнопка должна быть строго по центру относительно левого и правого края фрейма.
+           Все остальные текстовые блоки остаются с отступом слева 122px на больших экранах,
+           как в исходном задании. На мобильных устройствах отступы становятся меньше,
+           но кнопка всегда центрируется. */
+        .zone-3 {
+            width: 100%;
+            background-color: #6E483C;
+            padding: 40px 24px 60px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            position: relative;
+        }
+
+        /* Стили для текстовых блоков (левый отступ на десктопе - 122px) */
+        .price-text {
+            font-size: clamp(32px, 7vw, 48px);
+            font-weight: 400;
+            color: #FFFFFF;
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .desc-label {
+            font-size: clamp(24px, 5vw, 32px);
+            font-weight: 400;
+            color: #FFFFFF;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .desc-text {
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 400;
+            color: #FFFFFF;
+            margin: 0;
+            line-height: 1.4;
+            max-width: 100%;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        /* Контейнер для кнопки, чтобы центрировать её относительно фрейма (по горизонтали) */
+        .button-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        /* Кнопка: фиксированная ширина на десктопе, адаптив на мобильных, но всегда по центру */
+        .order-button {
+            background-color: #FFF2DF;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(24px, 5vw, 32px);
+            font-weight: 400;
+            color: #000000;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            text-align: center;
+            padding: 20px 32px;
+            width: auto;
+            min-width: 260px;
+            max-width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .order-button:hover {
+            background-color: #ffe6c2;
+            transform: scale(0.98);
+        }
+
+        .order-button:active {
+            transform: scale(0.96);
+        }
+
+        /* ========== ДЕСКТОПНАЯ ВЕРСИЯ (ширина >= 1024px) ========== 
+           Сохраняем левый отступ для текстов 122px как в оригинальном макете.
+           Кнопка при этом остается строго по центру фрейма (не привязана к левому отступу) */
+        @media (min-width: 1024px) {
+            .zone-3 {
+                padding: 40px 0 80px 0;   /* убираем боковые паддинги, чтобы точно управлять отступами */
+                gap: 28px;
+                position: relative;
+            }
+            /* Текстовые блоки сдвигаем влево на 122px, как в исходном задании */
+            .price-text {
+                margin-left: 122px;
+            }
+            .desc-label {
+                margin-left: 122px;
+            }
+            .desc-text {
+                margin-left: 122px;
+                white-space: nowrap;  /* на десктопе текст в одну строку как в макете */
+            }
+            /* Кнопка — центрируется относительно всей ширины .zone-3 (которая равна ширине фрейма) */
+            .button-wrapper {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            .order-button {
+                width: 492px;
+                max-width: 90%;
+                min-width: 380px;
+                padding: 35px 20px;
+                min-height: 141px;
+                font-size: 32px;
+            }
+        }
+
+        /* Планшеты (768px - 1023px): тексты с умеренным отступом, кнопка по центру */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .zone-3 {
+                padding: 40px 24px 60px 24px;
+                gap: 24px;
+            }
+            .price-text, .desc-label, .desc-text {
+                margin-left: 40px;
+            }
+            .desc-text {
+                white-space: normal;
+                max-width: 85%;
+            }
+            .button-wrapper {
+                justify-content: center;
+                width: 100%;
+            }
+            .order-button {
+                width: 80%;
+                max-width: 492px;
+                padding: 28px 20px;
+                min-height: 120px;
+            }
+        }
+
+        /* Мобильные устройства (до 767px): компактно, тексты без жёстких отступов, кнопка по центру */
+        @media (max-width: 767px) {
+            .zone-1 {
+                min-height: 140px;
+                padding: 16px;
+            }
+            .rounded-rect {
+                padding: 16px 20px;
+                border-radius: 24px;
+            }
+            .zone-2 {
+                padding: 16px;
+            }
+            .center-image {
+                border-radius: 20px;
+            }
+            .zone-3 {
+                padding: 32px 20px 48px 20px;
+                gap: 20px;
+                align-items: stretch;
+            }
+            .price-text, .desc-label, .desc-text {
+                margin-left: 0;
+                width: 100%;
+                text-align: left;
+            }
+            .desc-text {
+                white-space: normal;
+                font-size: 20px;
+            }
+            .price-text {
+                font-size: 36px;
+            }
+            .desc-label {
+                font-size: 28px;
+            }
+            .button-wrapper {
+                justify-content: center;
+                width: 100%;
+            }
+            .order-button {
+                width: 100%;
+                max-width: 100%;
+                padding: 20px 16px;
+                font-size: 26px;
+                min-height: 80px;
+                border-radius: 40px;
+            }
+        }
+
+        /* Очень маленькие телефоны (до 480px) */
+        @media (max-width: 480px) {
+            .price-text {
+                font-size: 32px;
+            }
+            .desc-label {
+                font-size: 24px;
+            }
+            .desc-text {
+                font-size: 18px;
+            }
+            .order-button {
+                font-size: 24px;
+                padding: 18px 12px;
+                min-height: 70px;
+            }
+            .zone-3 {
+                padding: 24px 16px 40px 16px;
+            }
+        }
+
+        /* Дополнительные улучшения */
+        .order-button:focus-visible {
+            outline: 3px solid #FFB347;
+            outline-offset: 4px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .center-image {
+            background-color: #CFB797;
+        }
+
+        /* гарантия, что кнопка центрируется даже в edge-случаях */
+        .button-wrapper {
+            display: flex;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="frame">
+    <!-- Первая зона: заголовок -->
+    <div class="zone-1">
+        <div class="rounded-rect">
+            <h1>Струны для акустической гитары</h1>
+        </div>
+    </div>
+
+    <!-- Вторая зона: картинка (квадрат 747x747) -->
+    <div class="zone-2">
+        <img class="center-image" 
+             src="images/Рисунок6.png" 
+             alt="Струны для акустической гитары"
+             loading="lazy"
+             title="Гитарный усилитель">
+    </div>
+
+    <!-- Третья зона: информация и центрированная кнопка -->
+    <div class="zone-3">
+        <div class="price-text">Цена: 700 р.</div>
+        <div class="desc-label">Описание:</div>
+        <div class="desc-text">Струны металлические для акустической гитары с серебряным покрытием. Калибр: 11. Количество: 6.</div>
+        <!-- Обертка для кнопки, обеспечивающая строгое центрирование по горизонтали -->
+        <div class="button-wrapper">
+            <button class="order-button" id="orderBtn">Заказать</button>
+        </div>
+    </div>
+</div>
+
+<!-- Скрипт: переход на index7.html без всплывающего сообщения -->
+<script>
+    (function() {
+        const orderButton = document.getElementById('orderBtn');
+        if (orderButton) {
+            const handleOrder = (event) => {
+                event.preventDefault();
+                if (window.navigator && window.navigator.vibrate) {
+                    window.navigator.vibrate(50);
+                }
+                // Переход на страницу оформления заказа (полная замена всплывающего сообщения)
+                window.location.href = 'index7.html';
+            };
+            orderButton.addEventListener('click', handleOrder);
+            // Тактильный отклик для touch-устройств без конфликта
+            orderButton.addEventListener('touchstart', (e) => {
+                e.currentTarget.style.transform = 'scale(0.96)';
+                setTimeout(() => {
+                    if (e.currentTarget) e.currentTarget.style.transform = '';
+                }, 120);
+            });
+        }
+        // Предотвращаем горизонтальный скролл на мобильных
+        const fixMobileOverflow = () => {
+            if (window.innerWidth < 768) {
+                document.body.style.overflowX = 'hidden';
+            } else {
+                document.body.style.overflowX = 'auto';
+            }
+        };
+        window.addEventListener('load', fixMobileOverflow);
+        window.addEventListener('resize', fixMobileOverflow);
+    })();
+</script>
+</body>
+</html>
